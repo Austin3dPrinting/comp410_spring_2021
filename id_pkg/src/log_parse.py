@@ -27,6 +27,12 @@ class LogParse:
             if m:
                 df.loc[id, 'Error'] = m.group(1)
 
+        if id == 114018:
+            # %ASA-3-114018: Failed to set port speed in 4GE SSM I/O card (error error_string).
+            m = re.search(r'\(error (\w+)', df.loc[id, 'Text'])
+            if m:
+                df.loc[id, 'Error'] = m.group(1)
+
         return df
 
     def parse_syslog_file(self, syslog_file):
